@@ -1,5 +1,5 @@
 # vue_base
-
+springboot+vue 前后端分离项目前端项目
 ## Project setup
 ```
 npm install
