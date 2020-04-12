@@ -12,7 +12,7 @@
           <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password"></el-input>
         </el-form-item>
         <el-form-item class="login_btn">
-          <el-button type="primary">登录</el-button>
+          <el-button type="primary" @click="submitForm('loginFormRef')">登录</el-button>
           <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
@@ -41,6 +41,16 @@
         }
       },
       methods:{
+        submitForm(formName){
+          this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            alert('error submit!!');
+            return false;
+          }
+        });
+        },
         resetLoginForm(){
           this.$refs.loginFormRef.resetFields()
         }
