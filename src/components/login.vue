@@ -4,12 +4,12 @@
       <div class="avator_box">
         <img src="../assets/logo.png">
       </div>
-      <el-form :model="loginForm"  label-width="80px" class="login_item">
-        <el-form-item label="用户名">
-          <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid"></el-input>
+      <el-form :model="loginForm"  :rules="rules" class="login_item">
+        <el-form-item>
+          <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid" prop="username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password"></el-input>
+        <el-form-item>
+          <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password" prop="password"></el-input>
         </el-form-item>
         <el-form-item class="login_btn">
           <el-button type="primary">登录</el-button>
@@ -27,6 +27,16 @@
           loginForm :{
             username: 'johnyehyo',
             password: '123456'
+          },
+          rules:{
+            username:[
+              { required: true, message: '请输入用户名', trigger: 'blur' },
+              { min: 0, max: 16, message: '长度在 0 到 16 个字符', trigger: 'blur' }
+            ],
+            password:[
+              { required: true, message: '请输入用户名', trigger: 'blur' },
+              { min: 6, max: 16, message: '长度在 0 到 16 个字符', trigger: 'blur' }
+            ]
           }
         }
       }
