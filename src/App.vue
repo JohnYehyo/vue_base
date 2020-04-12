@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <h1>首页根组件</h1>
-    <!-- 路由占位符 -->
     <router-view></router-view>
   </div>
 </template>
