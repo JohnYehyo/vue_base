@@ -4,16 +4,16 @@
       <div class="avator_box">
         <img src="../assets/logo.png">
       </div>
-      <el-form :model="loginForm"  :rules="rules" class="login_item">
-        <el-form-item>
-          <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid" prop="username"></el-input>
+      <el-form ref="loginFormRef" :model="loginForm"  :rules="rules" class="login_item">
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
-        <el-form-item>
-          <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password" prop="password"></el-input>
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password"></el-input>
         </el-form-item>
         <el-form-item class="login_btn">
           <el-button type="primary">登录</el-button>
-          <el-button type="info">重置</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -38,6 +38,11 @@
               { min: 6, max: 16, message: '长度在 0 到 16 个字符', trigger: 'blur' }
             ]
           }
+        }
+      },
+      methods:{
+        resetLoginForm(){
+          this.$refs.loginFormRef.resetFields()
         }
       }
     };
