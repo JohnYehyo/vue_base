@@ -6,7 +6,7 @@
       </div>
       <el-form ref="loginFormRef" :model="loginForm"  :rules="rules" class="login_item">
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username"  prefix-icon="el-icon-user-solid"></el-input>
+          <el-input v-model="loginForm.account"  prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="loginForm.password"  prefix-icon="el-icon-lock" type="password"></el-input>
@@ -25,13 +25,13 @@
       data(){
         return{
           loginForm :{
-            username: 'johnyehyo',
-            password: '123456'
+            account: '',
+            password: ''
           },
           rules:{
-            username:[
+            account:[
               { required: true, message: '请输入用户名', trigger: 'blur' },
-              { min: 0, max: 16, message: '长度在 0 到 16 个字符', trigger: 'blur' }
+              { min: 1, max: 12, message: '长度在 0 到 16 个字符', trigger: 'blur' }
             ],
             password:[
               { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -42,9 +42,19 @@
       },
       methods:{
         submitForm(formName){
-          this.$refs[formName].validate((valid) => {
+          this.$refs[formName].validate(async valid => {
           if (valid) {
-            alert('submit!');
+            //1 基本用法
+            // this.$http.post('login', this.loginForm).then(data =>{
+            //   console.log(data.data)
+            //   }
+            // )
+            //2 async await用法
+            const result = await this.$http.post('login', this.loginForm);
+            console.log(result)
+            if(result.data.code == 200){
+              console.log("登录成功!")
+            }
           } else {
             alert('error submit!!');
             return false;
