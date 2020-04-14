@@ -51,16 +51,15 @@ export default {
           // )
           //2 async await用法
           const result = await this.$http.post("login", this.loginForm);
-          console.log(result);
           if (result.data.code == 200) {
             // 保存token
-            window.sessionStorage.setItem('token', result.data.token)
+            window.sessionStorage.setItem("token", result.data.token);
             //跳转主页
-            this.$router.push('/home')
+            this.$router.push("/home");
+          } else {
+            // this.$message({message: '用户名或密码错误', type: 'error'})
+            this.$message.error("用户名或密码错误");
           }
-        } else {
-          alert("error submit!!");
-          return false;
         }
       });
     },
