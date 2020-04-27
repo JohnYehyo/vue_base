@@ -6,7 +6,7 @@
       </div>
       <el-form ref="loginFormRef" :model="loginForm" :rules="rules" class="login_item">
         <el-form-item prop="username">
-          <el-input v-model="loginForm.account" prefix-icon="el-icon-user-solid"></el-input>
+          <el-input v-model="loginForm.username" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" prefix-icon="el-icon-lock" type="password"></el-input>
@@ -25,11 +25,11 @@ export default {
   data() {
     return {
       loginForm: {
-        account: "",
+        username: "",
         password: ""
       },
       rules: {
-        account: [
+        username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
           { min: 1, max: 12, message: "长度在 0 到 16 个字符", trigger: "blur" }
         ],
@@ -50,10 +50,13 @@ export default {
           //   }
           // )
           //2 async await用法
-          const result = await this.$http.post("login", this.loginForm);
+          const params = new URLSearchParams();
+          params.append('username', this.loginForm.username);
+          params.append('password', this.loginForm.password);
+          const result = await this.$http.post("login", params);
           if (result.data.code == 200) {
             // 保存token
-            window.sessionStorage.setItem("token", result.data.token);
+            window.sessionStorage.setItem("token", result.data.data.token);
             //跳转主页
             this.$router.push("/home");
           } else {
