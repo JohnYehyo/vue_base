@@ -56,6 +56,9 @@
 
 <script>
 export default {
+  created(){
+    this.menus()
+  },
   methods: {
     logout() {
       window.sessionStorage.clear();
@@ -66,6 +69,10 @@ export default {
     },
     handleClose(){
 
+    },
+    async menus(){
+     const result =  await this.$http.get("/sys/menu");
+     console.log(result)
     }
   }
 };
