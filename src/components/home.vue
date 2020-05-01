@@ -71,6 +71,7 @@ export default {
 
     },
     async menus(){
+   
      const result =  await this.$http.get("sys/menu");
      console.log(result)
     }
